@@ -108,6 +108,26 @@ function createLinkedList(){
 
                 return string + "null"
             }
+        },
+        insertAt(value, index){
+            let currentIndex = 0;
+            let currentNode = this.root
+            let previousNode = null;
+            while(index != currentIndex){
+                [previousNode, currentNode] = [currentNode, currentNode.nextNode];
+                currentIndex++
+            }
+            previousNode.nextNode = createNode(value, currentNode);
+        },
+        removeAt(index){
+            let currentIndex = 0;
+            let currentNode = this.root
+            let previousNode = null;
+            while(index != currentIndex){
+                [previousNode, currentNode] = [currentNode, currentNode.nextNode];
+                currentIndex++
+            }
+            previousNode.nextNode = currentNode.nextNode;
         }
     }
 }
@@ -117,4 +137,6 @@ list.append(2);
 list.append(3);
 list.append(1);
 list.prepend(8);
+//list.insertAt(50, 2)
+//list.removeAt(2);
 console.log(list.toString())
