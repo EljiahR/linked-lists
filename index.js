@@ -7,16 +7,16 @@ function createNode(value = null,nextNode = null){
 
 function createLinkedList(){
     return {
-        head: null,
+        root: null,
 
         append(value){
-            if(!this.head){
-                this.head = createNode(value)
+            if(!this.root){
+                this.root = createNode(value)
             }else {
-                if(!this.head.nextNode){
-                    this.head.nextNode = createNode(value)
+                if(!this.root.nextNode){
+                    this.root.nextNode = createNode(value)
                 }else{
-                    tail = this.head.nextNode;
+                    tail = this.root.nextNode;
                     while(tail.nextNode){
                         tail = tail.nextNode;
                     }
@@ -24,12 +24,12 @@ function createLinkedList(){
                 }
             }
         },
-        getHead(){
-            return this.head;
+        head(){
+            return this.root;
         },
 
         tail(){
-            let tail = this.head.nextNode;
+            let tail = this.root.nextNode;
             while(tail.nextNode){
                 tail = tail.nextNode
             }
@@ -38,14 +38,14 @@ function createLinkedList(){
 
         prepend(value){
             const newHead = createNode(value);
-            [newHead.nextNode, this.head]= [this.head, newHead];
+            [newHead.nextNode, this.root]= [this.root, newHead];
         },
 
         size(){
             let size = 0;
-            if(this.head){
+            if(this.root){
                 size++;
-                let tail = this.head.nextNode;
+                let tail = this.root.nextNode;
                 while(tail){
                     tail = tail.nextNode
                     size++
@@ -54,11 +54,36 @@ function createLinkedList(){
             return size;
         },
 
-        at(index){},
+        at(index){
+            let currentIndex = 0;
+            let value = this.root;
+            while(index != currentIndex){
+                value = value.nextNode;
+                currentIndex++
+            }
+            return value;
+        },
 
-        pop(){},
+        pop(){
+           
+            let previous = null
+            let tail = this.root;
+            while(tail.nextNode){
+                [tail,previous] = [tail.nextNode,tail]
+            }
+            previous.nextNode = null
+            
+        },
 
-        contains(value){},
+        contains(value){
+            if(this.root.value === value) return true;
+            let tail = this.root.nextNode;
+            while(tail){
+                if(tail.value === value) return true;
+                tail = tail.nextNode;
+            }
+            return false;
+        },
 
         find(value){},
 
@@ -71,4 +96,5 @@ list.append(2);
 list.append(3);
 list.append(1);
 list.prepend(8);
-console.log(list.size())
+list.pop();
+console.log(list.contains(6))
