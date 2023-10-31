@@ -36,9 +36,23 @@ function createLinkedList(){
             return tail;
         },
 
-        prepend(value){},
+        prepend(value){
+            const newHead = createNode(value);
+            [newHead.nextNode, this.head]= [this.head, newHead];
+        },
 
-        size(){},
+        size(){
+            let size = 0;
+            if(this.head){
+                size++;
+                let tail = this.head.nextNode;
+                while(tail){
+                    tail = tail.nextNode
+                    size++
+                }
+            }
+            return size;
+        },
 
         at(index){},
 
@@ -55,5 +69,6 @@ function createLinkedList(){
 const list = createLinkedList();
 list.append(2);
 list.append(3);
-list.append(1)
-console.log()
+list.append(1);
+list.prepend(8);
+console.log(list.size())
