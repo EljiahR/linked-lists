@@ -85,7 +85,17 @@ function createLinkedList(){
             return false;
         },
 
-        find(value){},
+        find(value){
+            let index = 0
+            if(this.root.value === value) return index;
+            let tail = this.root.nextNode;
+            while(tail){
+                index++
+                if(tail.value === value) return index;
+                tail = tail.nextNode;
+            }
+            return null;
+        },
 
         toString(){}
     }
@@ -97,4 +107,4 @@ list.append(3);
 list.append(1);
 list.prepend(8);
 list.pop();
-console.log(list.contains(6))
+console.log(list.find(3))
